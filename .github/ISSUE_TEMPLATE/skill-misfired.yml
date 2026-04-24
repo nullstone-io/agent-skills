@@ -1,0 +1,48 @@
+name: Skill misfired
+description: A skill triggered when it shouldn't have, or didn't trigger when it should have.
+title: "[misfire] <skill-name>: <short summary>"
+labels: ["skill-misfire"]
+body:
+  - type: dropdown
+    id: skill
+    attributes:
+      label: Which skill?
+      options:
+        - nullstone-config-files
+        - (other — specify below)
+    validations:
+      required: true
+  - type: dropdown
+    id: direction
+    attributes:
+      label: What happened?
+      options:
+        - Skill triggered when it should NOT have
+        - Skill did NOT trigger when it should have
+    validations:
+      required: true
+  - type: textarea
+    id: prompt
+    attributes:
+      label: User prompt (or file path that was edited)
+      description: Paste the exact message or describe the action Claude was taking.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: input
+    id: skill-version
+    attributes:
+      label: Installed catalog version
+      description: Tag or commit SHA of `agent-skills` you have installed.
+      placeholder: "v0.1.0"
+  - type: input
+    id: claude-version
+    attributes:
+      label: Claude Code version
+      placeholder: "claude --version output"

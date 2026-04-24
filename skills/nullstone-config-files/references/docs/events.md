@@ -7,8 +7,8 @@ An event is a way to emit notifications, send webhooks, or trigger tasks as a re
 
 Events consist of 2 pieces:
 
-1. a set of event selectors or filters (e.g. which event actions, for which blocks)
-2. a set of targets that serve as a reaction to those events (e.g. slack notification, webhook, etc.)
+1.  a set of event selectors or filters (e.g. which event actions, for which blocks)
+2.  a set of targets that serve as a reaction to those events (e.g. slack notification, webhook, etc.)
 
 When added to an IaC file, these events are registered on the environment where GitOps synchronization is performed. You can find these events in the Nullstone UI by navigating to an environment and switching to the "Events" tab. Events registered through GitOps will be labeled with "Managed By" in the UI which indicates that only that repository can edit/remove the event.
 
@@ -48,12 +48,12 @@ The `actions` element allows a developer to select a set of actions that will tr
 
 Available Actions:
 
-* `app-deployed` - Occurs when an app deployment finishes
-* `app-first-deployed` - Occurs when an app deployment finishes for the first time
-* `block-launched` - Occurs when the infra for a block is initially provisioned
-* `block-updated` - Occurs when the infra for a block is updated
-* `block-destroyed` - Occurs when the infra for a block is destroyed
-* `block-needs-approval` - Occurs when Nullstone requires approval to complete an infra update
+-   `app-deployed` - Occurs when an app deployment finishes
+-   `app-first-deployed` - Occurs when an app deployment finishes for the first time
+-   `block-launched` - Occurs when the infra for a block is initially provisioned
+-   `block-updated` - Occurs when the infra for a block is updated
+-   `block-destroyed` - Occurs when the infra for a block is destroyed
+-   `block-needs-approval` - Occurs when Nullstone requires approval to complete an infra update
 
 ### `blocks`
 
@@ -65,10 +65,10 @@ The `statuses` element allows a developer to filter to a set of statuses that wi
 
 Available Statuses:
 
-* `completed` - Occurs when the action succeeded.
-* `failed` - Occurs when the action failed.
-* `cancelled` - Occurs when a user or the system cancelled the action.
-* `disapproved` - Occurs when a user disapproves the action.
+-   `completed` - Occurs when the action succeeded.
+-   `failed` - Occurs when the action failed.
+-   `cancelled` - Occurs when a user or the system cancelled the action.
+-   `disapproved` - Occurs when a user disapproves the action.
 
 ### `targets`
 

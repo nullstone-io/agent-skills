@@ -1,7 +1,7 @@
 <!-- source: https://docs.nullstone.io/gitops/iac/overview.html -->
 <!-- fetched: 2026-04-24 -->
 
-# Infrastructure-as-Code Overview
+# Infrastructure as Code
 
 You can use the Nullstone UI to configure your applications and infrastructure, but there are times when you want to configure in code. Placing configuration in code allows you to automate configuration, track infrastructure changes in version control, and share configuration with your team.
 
@@ -13,10 +13,12 @@ Having configuration in code allows you to correlate infrastructure changes with
 
 There are two types of Nullstone IaC files that are placed in `.nullstone/` directory of your repository.
 
-*   `.nullstone/config.yml` - Used as a primary source of configuration
-*   Overrides file - Used to override configuration per environment from `nullstone/config.yml` or from the Nullstone UI.
+-   `.nullstone/config.yml` - Used as a primary source of configuration
+-   Overrides file - Used to override configuration per environment from `nullstone/config.yml` or from the Nullstone UI.
 
 An overrides file is either named `previews.yml` (for all preview environments) or `<env-name>.yml` (for a specific environment override). Nullstone GitOps runs a synchronization per environment so the effective config will be a merge of `config.yml` and the env-specific overrides file. If you change a `previews.yml` in a pull request, it will only affect the preview environment(s) that are synced on that branch.
+
+TIP
 
 You can manage multiple stacks from a single repository using stack-specific subdirectories (e.g. `.nullstone/stacks/<stack-name>/config.yml`). See [Multi-Stack Configuration](https://docs.nullstone.io/gitops/iac/multi-stack.html) for details.
 
@@ -40,25 +42,25 @@ apps:
 
 Nullstone supports auto-completion and validation in your editor.
 
-A JSON schema is published to [schemastore.org](https://www.schemastore.org/json/).
+We publish a JSON schema (it applies to YAML as well) to [schemastore.org](https://www.schemastore.org/json/).
 
 The following editors are supported:
 
-*   Android Studio
-*   CLion
-*   Emacs via [eglot](https://github.com/joaotavora/eglot)
-*   IntelliJ IDEA
-*   JSONBuddy
-*   Neovim via [SchemaStore.nvim](https://github.com/b0o/SchemaStore.nvim)
-*   PhpStorm
-*   PyCharm
-*   ReSharper
-*   Rider
-*   RubyMine
-*   SublimeText via [LSP-json](https://packagecontrol.io/packages/LSP-json), [LSP-yaml](https://packagecontrol.io/packages/LSP-yaml)
-*   Visual Studio
-*   Visual Studio Code ([YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml), [TOML](https://marketplace.visualstudio.com/items?itemName=tamasfe.even-better-toml), [JSON](https://marketplace.visualstudio.com/items?itemName=remcohaszing.schemastore))
-*   Visual Studio for Mac
-*   WebStorm
+-   Android Studio
+-   CLion
+-   Emacs via [eglot](https://github.com/joaotavora/eglot)
+-   IntelliJ IDEA
+-   JSONBuddy
+-   Neovim via [SchemaStore.nvim](https://github.com/b0o/SchemaStore.nvim)
+-   PhpStorm
+-   PyCharm
+-   ReSharper
+-   Rider
+-   RubyMine
+-   SublimeText via [LSP-json](https://packagecontrol.io/packages/LSP-json),[LSP-yaml](https://packagecontrol.io/packages/LSP-yaml)
+-   Visual Studio
+-   Visual Studio Code ([YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml),[TOML](https://marketplace.visualstudio.com/items?itemName=tamasfe.even-better-toml),[JSON](https://marketplace.visualstudio.com/items?itemName=remcohaszing.schemastore))
+-   Visual Studio for Mac
+-   WebStorm
 
-If you want to download the JSON schema file directly, you can find it on the open-source repository [nullstone-io/iac](https://github.com/nullstone-io/iac/tree/master/.schema).
+If you want to download the JSON schema file directly, you can find it on our open-source repository [nullstone-io/iac](https://github.com/nullstone-io/iac/tree/master/.schema).

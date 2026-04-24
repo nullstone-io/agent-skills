@@ -9,8 +9,6 @@ An ingress has the same schema as a [`block`](https://docs.nullstone.io/gitops/i
 
 ## Examples
 
-_(No examples in upstream docs as of fetch date.)_
-
 ## Attributes
 
 ### `module`

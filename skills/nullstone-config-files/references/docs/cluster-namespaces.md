@@ -3,7 +3,7 @@
 
 # `cluster_namespaces` top-level element
 
-A cluster namespace is a block that represents an isolated separation of compute resources within a [cluster](https://docs.nullstone.io/gitops/iac/clusters.html).
+A cluster namespace is a block that represents an isolated separation of compute resources within a [cluster](https://docs.nullstone.io/gitops/iac/cluster-namespaces.html).
 
 A cluster namespace has the same schema as a [`block`](https://docs.nullstone.io/gitops/iac/blocks.html).
 

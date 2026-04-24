@@ -1,3 +1,6 @@
 # IDE
 .idea/
 .vscode/
+
+# CI tooling
+.github/scripts/node_modules/

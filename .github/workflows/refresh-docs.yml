@@ -1,0 +1,48 @@
+name: Refresh bundled docs
+
+on:
+  schedule:
+    - cron: "0 14 * * 1"   # Mondays at 14:00 UTC
+  workflow_dispatch:
+
+jobs:
+  refresh:
+    name: Re-fetch docs.nullstone.io/gitops/iac/*
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: yarn
+          cache-dependency-path: .github/scripts/yarn.lock
+
+      - name: Install deps
+        working-directory: .github/scripts
+        run: yarn install --frozen-lockfile
+
+      - name: Refresh docs
+        working-directory: .github/scripts
+        run: yarn refresh-docs
+
+      - name: Open PR if changed
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: auto/refresh-docs
+          base: master
+          commit-message: "Refresh bundled Nullstone IaC docs"
+          title: "Refresh bundled Nullstone IaC docs"
+          labels: docs-refresh
+          body: |
+            Automated refresh of `skills/nullstone-config-files/references/docs/*.md`
+            from docs.nullstone.io/gitops/iac/. Review the diff to make sure the
+            changes reflect intentional upstream edits (and not, say, a site
+            redesign that mangled the conversion).
+
+            If content changed enough to affect skill behavior, bump the catalog
+            version per [VERSIONING.md](../VERSIONING.md) before merging.
+          delete-branch: true

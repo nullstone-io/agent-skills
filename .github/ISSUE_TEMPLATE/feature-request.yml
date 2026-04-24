@@ -1,0 +1,23 @@
+name: New skill or enhancement
+description: Propose a new skill or an enhancement to an existing one.
+title: "[feature] <short summary>"
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What workflow is painful today?
+      description: Describe the Nullstone workflow Claude struggles with without this skill.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed skill / change
+    validations:
+      required: true
+  - type: textarea
+    id: triggers
+    attributes:
+      label: When should the skill trigger?
+      description: Specific prompts, file paths, or Claude-Code actions.

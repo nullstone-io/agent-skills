@@ -123,9 +123,8 @@ Default to **string, shortest form**. Omit `<stack>.` / `<env>.` segments that m
 |---------------------------------------------|---------------------------------------|
 | Same stack, same env                        | `block-name`                          |
 | Same stack, different env                   | `env-name.block-name`                 |
-| Different stack, same env                   | `stack-name.block-name`               |
 | Different stack, different env              | `stack-name.env-name.block-name`      |
-| Shared infra in `global` stack/`global` env | `global.global.block-name`            |
+| Global infra in `global` stack/`global` env | `global.global.block-name`            |
 
 Only use the object form (`{ block_name, env_name, stack_name }`) if the user explicitly asks for it.
 

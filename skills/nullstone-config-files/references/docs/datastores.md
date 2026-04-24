@@ -5,15 +5,15 @@
 
 A datastore is a block that represents a service that holds data. This is a broad category and includes many types of datastores including:
 
-* relational databases (e.g. postgres, mysql)
-* nosql databases (e.g. mongodb, dynamodb)
-* cache and key/value stores (e.g. redis, consul)
-* message queues (e.g. kafka, sqs)
-* object stores (e.g. s3, file volumes)
-* secret managers (e.g. vault)
-* log/metric providers (e.g. datadog, splunk, sumologic)
+-   relational databases (e.g. postgres, mysql)
+-   nosql databases (e.g. mongodb, dynamodb)
+-   cache and key/value stores (e.g. redis, consul)
+-   message queues (e.g. kafka, sqs)
+-   object stores (e.g. s3, file volumes)
+-   secret managers (e.g. vault)
+-   log/metric providers (e.g. datadog, splunk, sumologic)
 
-A datastore has the same schema as a [block](https://docs.nullstone.io/gitops/iac/blocks.html).
+A datastore has the same schema as a [`block`](https://docs.nullstone.io/gitops/iac/blocks.html).
 
 ## Examples
 
@@ -51,16 +51,16 @@ datastores:
 
 ### `module`
 
-See [blocks#module](https://docs.nullstone.io/gitops/iac/blocks.html#module).
+See [`blocks#module`](https://docs.nullstone.io/gitops/iac/blocks.html#module).
 
 ### `module_version`
 
-See [blocks#module_version](https://docs.nullstone.io/gitops/iac/blocks.html#module_version).
+See [`blocks#module_version`](https://docs.nullstone.io/gitops/iac/blocks.html#module_version).
 
 ### `vars`
 
-See [blocks#vars](https://docs.nullstone.io/gitops/iac/blocks.html#vars).
+See [`blocks#vars`](https://docs.nullstone.io/gitops/iac/blocks.html#vars).
 
 ### `connections`
 
-See [blocks#connections](https://docs.nullstone.io/gitops/iac/blocks.html#connections).
+See [`blocks#connections`](https://docs.nullstone.io/gitops/iac/blocks.html#connections).

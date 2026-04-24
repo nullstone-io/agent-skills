@@ -1,7 +1,7 @@
 <!-- source: https://docs.nullstone.io/gitops/iac/networks.html -->
 <!-- fetched: 2026-04-24 -->
 
-# `networks` Top-Level Element
+# `networks` top-level element
 
 A network is a block that represents a virtual network and its associated subnets, routes, and base networking components.
 

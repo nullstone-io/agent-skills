@@ -19,7 +19,7 @@ apps:
           postgres: postgres
 ```
 
-### Rails SECRET_KEY_BASE
+### Rails SECRET\_KEY\_BASE
 
 ```yaml
 apps:
@@ -81,7 +81,7 @@ apps:
       - name: postgres
         module: nullstone/aws-postgres-access
         connections:
-          postgres: db
+          postgres: db 
 
 datastores:
   db:

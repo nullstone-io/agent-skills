@@ -3,7 +3,7 @@
 
 # `clusters` top-level element
 
-A cluster is a block that represents a set of compute resources used to host a collection of VMs and/or containers.
+A cluster is a block that represents a set of compute resources used to host a collection of VMS and/or containers.
 
 A cluster has the same schema as a [`block`](https://docs.nullstone.io/gitops/iac/blocks.html).
 

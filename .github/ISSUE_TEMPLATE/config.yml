@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Nullstone Docs
+    url: https://docs.nullstone.io
+    about: General questions about using Nullstone — start in the docs.
+  - name: Nullstone Community
+    url: https://nullstone.io/community
+    about: Discussion and usage questions.

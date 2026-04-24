@@ -1,7 +1,7 @@
 <!-- source: https://docs.nullstone.io/gitops/iac/apps.html -->
 <!-- fetched: 2026-04-24 -->
 
-# apps top-level element
+# `apps` top-level element
 
 An app is a logical representation of a service or application. There are four types of application patterns: container, serverless, static site, or VM-based. The pattern for an application is defined by the selected Nullstone module as configured in the `module` parameter.
 
@@ -55,9 +55,9 @@ The `environment` refers to "Custom" environment variables that are injected int
 
 Nullstone injects environment variables into applications by merging environment variables from three sources:
 
-- [Standard](https://docs.nullstone.io/getting-started/applications/env-variables.html#injected-by-nullstone)
-- [From Capabilities](https://docs.nullstone.io/getting-started/applications/env-variables.html#from-capabilities)
-- [Custom](https://docs.nullstone.io/getting-started/applications/env-variables.html#custom-environment-variables)
+-   [Standard](https://docs.nullstone.io/getting-started/applications/env-variables.html#injected-by-nullstone)
+-   [From Capabilities](https://docs.nullstone.io/getting-started/applications/env-variables.html#from-capabilities)
+-   [Custom](https://docs.nullstone.io/getting-started/applications/env-variables.html#custom-environment-variables)
 
 When specified in `.nullstone/config.yml`, `environment` overrides any "Custom" env variables configured in the Nullstone UI. When specified in an overrides file, `environment` _appends_ entries to the existing set of environment variables defined in the Nullstone UI or in `.nullstone/config.yml`.
 

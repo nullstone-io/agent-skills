@@ -25,9 +25,9 @@ To configure multiple stacks, create a `stacks/` directory inside `.nullstone/` 
 
 Each stack directory uses the same file conventions as the default `.nullstone/` directory:
 
-* `config.yml` - Primary source of configuration for the stack
-* `previews.yml` - Overrides for all preview environments
-* `<env-name>.yml` - Overrides for a specific environment
+-   `config.yml` - Primary source of configuration for the stack
+-   `previews.yml` - Overrides for all preview environments
+-   `<env-name>.yml` - Overrides for a specific environment
 
 The directory name (e.g. `stack1`, `stack2`) must match the name of the stack in Nullstone.
 
@@ -85,9 +85,8 @@ apps:
 
 You do not need to use multi-stack configuration if you only manage one stack. The default `.nullstone/config.yml` continues to work as before.
 
-| Layout | Configuration Path |
-|--------|-------------------|
-| Single stack (default) | `.nullstone/config.yml` |
-| Multi-stack | `.nullstone/stacks/<stack-name>/config.yml` |
+<table tabindex="0"><thead><tr><th>Layout</th><th>Configuration Path</th></tr></thead><tbody><tr><td>Single stack (default)</td><td><code>.nullstone/config.yml</code></td></tr><tr><td>Multi-stack</td><td><code>.nullstone/stacks/&lt;stack-name&gt;/config.yml</code></td></tr></tbody></table>
 
-> Multi-stack configuration can be used alongside the default single-stack layout. If a stack does not have a matching directory under `.nullstone/stacks/`, Nullstone falls back to the root `.nullstone/` configuration.
+TIP
+
+Multi-stack configuration can be used alongside the default single-stack layout. If a stack does not have a matching directory under `.nullstone/stacks/`, Nullstone falls back to the root `.nullstone/` configuration.

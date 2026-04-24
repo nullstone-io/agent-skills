@@ -1,0 +1,51 @@
+name: Skill produced wrong output
+description: The skill triggered correctly but the YAML/output it produced was wrong, invalid, or off-style.
+title: "[output] <skill-name>: <short summary>"
+labels: ["skill-output"]
+body:
+  - type: dropdown
+    id: skill
+    attributes:
+      label: Which skill?
+      options:
+        - nullstone-config-files
+        - (other — specify below)
+    validations:
+      required: true
+  - type: textarea
+    id: prompt
+    attributes:
+      label: User prompt / task
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: produced
+    attributes:
+      label: What Claude produced
+      description: Paste the offending YAML block or edit.
+      render: yaml
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What it should have produced
+      render: yaml
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - Invalid — breaks Nullstone schema or sync
+        - Wrong — valid YAML but incorrect semantics (bad block type, wrong connection, etc.)
+        - Style — valid and correct but violates the catalog's style rules
+    validations:
+      required: true
+  - type: input
+    id: skill-version
+    attributes:
+      label: Installed catalog version
+      placeholder: "v0.1.0"

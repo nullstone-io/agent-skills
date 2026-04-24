@@ -1,7 +1,7 @@
 <!-- source: https://docs.nullstone.io/gitops/iac/event-targets.html -->
 <!-- fetched: 2026-04-24 -->
 
-# event.targets top-level element
+# `event targets` element
 
 The `targets` section enables a developer to emit a notification, send a webhook, and/or trigger a task.
 
@@ -42,7 +42,9 @@ Before using this, you must connect a Slack workspace to your Nullstone organiza
 
 The `channels` section allows a developer to choose a list of Slack channels to send notifications.
 
-> The Nullstone bot must be a member of private channels. Type `/invite @Nullstone` in the Slack channel after configuring the Slack integration.
+TIP
+
+The Nullstone bot must be a member of private channels. Type `/invite @Nullstone` in the Slack channel after configuring the Slack integration.
 
 ### `webhook`
 
@@ -124,7 +126,7 @@ Nullstone sends the following payload to the specified URL when an event occurs:
   "initiator": {
     "trigger": {
       "source": "string: enum(manual, github)",
-      "event": "string: enum(user, automation, vcs-push, vcs-pull-request-opened, vcs-pull-request-labelled, gitops-enable, gitops-change-branch, env-create)"
+      "event": "string: enum(user, automation, vcs-push, vcs-pull-request-opened, vcs-pull-request-labelled, gitops-enable, gitops-change-branch, env-create)",
     },
     "repoInfo": {},
     "commitInfo": {}

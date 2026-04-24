@@ -1,0 +1,53 @@
+name: Schema drift check
+
+on:
+  schedule:
+    - cron: "0 13 * * *"   # daily at 13:00 UTC
+  workflow_dispatch:
+
+jobs:
+  check:
+    name: Compare bundled schemas to upstream nullstone-io/iac
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: yarn
+          cache-dependency-path: .github/scripts/yarn.lock
+
+      - name: Install deps
+        working-directory: .github/scripts
+        run: yarn install --frozen-lockfile
+
+      - name: Check drift
+        working-directory: .github/scripts
+        run: yarn check-drift
+
+      - name: Open issue on drift
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { repo, owner } = context.repo;
+            const title = "Bundled IaC schema has drifted from upstream";
+            const existing = await github.rest.issues.listForRepo({
+              owner, repo, state: "open", labels: "schema-drift",
+            });
+            if (existing.data.some(i => i.title === title)) return;
+            await github.rest.issues.create({
+              owner, repo, title,
+              labels: ["schema-drift"],
+              body: [
+                "The daily schema-drift check detected a difference between the bundled",
+                "`skills/nullstone-config-files/references/schema/config.*.json` files and the",
+                "upstream equivalents in `nullstone-io/iac/.schema/` on `master`.",
+                "",
+                "See the failing workflow run for the specific file(s) and hashes.",
+                "",
+                "To resolve: copy the upstream file in, update the skill's CHANGELOG entry",
+                "(MINOR for additive changes, MAJOR for breaking), and open a PR.",
+              ].join("\n"),
+            });

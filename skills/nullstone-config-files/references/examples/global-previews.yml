@@ -1,0 +1,18 @@
+# Path: .nullstone/previews.yml
+# Overlay applied to every preview environment on top of .nullstone/config.yml.
+# Only include fields that DIFFER from the base config.
+# Overlay files may omit `module`. For apps, `environment` in an overlay APPENDS
+# to the base set; it does not replace it.
+
+version: "0.1"
+
+apps:
+  api:
+    environment:
+      LOG_LEVEL: debug
+
+datastores:
+  db:
+    vars:
+      instance_class: "db.t3.small"
+      allocated_storage: 20

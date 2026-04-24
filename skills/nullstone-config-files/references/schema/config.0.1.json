@@ -1,0 +1,303 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nullstone.io/.nullstone/config.yml",
+  "title": "Nullstone configuration specification",
+  "description": "The Nullstone configuration file is a YAML file defining a platform-agnostic architecture",
+  "type": "object",
+  "properties": {
+    "version": {
+      "const": "0.1"
+    },
+    "apps": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z0-9\\-]+$": { "$ref":  "#/definitions/app" }
+      },
+      "additionalProperties": false
+    },
+    "blocks": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z0-9\\-]+$": { "$ref":  "#/definitions/block" }
+      },
+      "additionalProperties": false
+    },
+    "cluster_namespaces": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z0-9\\-]+$": { "$ref":  "#/definitions/cluster_namespace" }
+      },
+      "additionalProperties": false
+    },
+    "clusters": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z0-9\\-]+$": { "$ref":  "#/definitions/cluster" }
+      },
+      "additionalProperties": false
+    },
+    "datastores": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z0-9\\-]+$": { "$ref":  "#/definitions/datastore" }
+      },
+      "additionalProperties": false
+    },
+    "domains": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z0-9\\-]+$": { "$ref":  "#/definitions/domain" }
+      },
+      "additionalProperties": false
+    },
+    "ingresses": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z0-9\\-]+$": { "$ref":  "#/definitions/ingress" }
+      },
+      "additionalProperties": false
+    },
+    "networks": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z0-9\\-]+$": { "$ref":  "#/definitions/network" }
+      },
+      "additionalProperties": false
+    },
+    "subdomains": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z0-9\\-]+$": { "$ref":  "#/definitions/subdomain" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": ["version"],
+  "additionalProperties": false,
+  "definitions": {
+    "block": {
+      "id": "#/definitions/block",
+      "type": "object",
+      "properties": {
+        "module": {
+          "type": "string",
+          "description": ""
+        },
+        "module_version": {
+          "type": "string",
+          "description": ""
+        },
+        "vars": { "$ref": "#/definitions/variables" },
+        "connections": { "$ref": "#/definitions/connection_targets" },
+        "is_shared": {
+          "type": "boolean",
+          "description": ""
+        }
+      },
+      "patternProperties": {"^x-": {}},
+      "additionalProperties": false
+    },
+    "app": {
+      "id": "#/definitions/app",
+      "type": "object",
+      "properties": {
+        "module": {
+          "type": "string",
+          "description": ""
+        },
+        "module_version": {
+          "type": "string",
+          "description": ""
+        },
+        "vars": { "$ref": "#/definitions/variables" },
+        "connections": { "$ref": "#/definitions/connection_targets" },
+        "is_shared": {
+          "type": "boolean",
+          "description": ""
+        },
+        "framework": {
+          "type": "string",
+          "description": ""
+        },
+        "environment": {
+          "type": "object",
+          "patternProperties": {
+            "^[A-Za-z0-9_]+$": { "type": "string" }
+          }
+        },
+        "capabilities": {
+          "oneOf": [
+            { "$ref":  "#/definitions/capabilities" },
+            { "$ref":  "#/definitions/capabilitiesArray" }
+          ]
+        }
+      },
+      "patternProperties": {"^x-": {}},
+      "additionalProperties": false
+    },
+    "cluster_namespace": {
+      "allOf": [
+        { "$ref": "#/definitions/block" }
+      ]
+    },
+    "cluster": {
+      "allOf": [
+        { "$ref": "#/definitions/block" }
+      ]
+    },
+    "datastore": {
+      "allOf": [
+        { "$ref": "#/definitions/block" }
+      ]
+    },
+    "domain": {
+      "id": "#/definitions/subdomain",
+      "type": "object",
+      "properties": {
+        "module": {
+          "type": "string",
+          "description": ""
+        },
+        "module_version": {
+          "type": "string",
+          "description": ""
+        },
+        "vars": { "$ref": "#/definitions/variables" },
+        "connections": { "$ref": "#/definitions/connection_targets" },
+        "dns": { "$ref": "#/definitions/domain_dns" }
+      },
+      "patternProperties": {"^x-": {}},
+      "additionalProperties": false
+    },
+    "domain_dns": {
+      "id": "#/definitions/domain_dns",
+      "type": "object",
+      "properties": {
+        "template": {
+          "type": "string",
+          "description": "A templated string for configuration the domain name. This interpolates {{ NULLSTONE_ORG }}"
+        }
+      },
+      "patternProperties": {"^x-": {}},
+      "additionalProperties": false
+    },
+    "ingress": {
+      "allOf": [
+        { "$ref": "#/definitions/block" }
+      ]
+    },
+    "network": {
+      "allOf": [
+        { "$ref": "#/definitions/block" }
+      ]
+    },
+    "subdomain": {
+      "id": "#/definitions/subdomain",
+      "type": "object",
+      "properties": {
+        "module": {
+          "type": "string",
+          "description": ""
+        },
+        "module_version": {
+          "type": "string",
+          "description": ""
+        },
+        "vars": { "$ref": "#/definitions/variables" },
+        "connections": { "$ref": "#/definitions/connection_targets" },
+        "is_shared": {
+          "type": "boolean",
+          "description": ""
+        },
+        "dns": { "$ref": "#/definitions/subdomain_dns" }
+      },
+      "patternProperties": {"^x-": {}},
+      "additionalProperties": false
+    },
+    "subdomain_dns": {
+      "id": "#/definitions/subdomain_dns",
+      "type": "object",
+      "properties": {
+        "template": {
+          "type": "string",
+          "description": "A templated string for configuration the subdomain name. This interpolates {{ random() }}, {{ NULLSTONE_ORG }}, {{ NULLSTONE_STACK }}, {{ NULLSTONE_ENV }}"
+        }
+      },
+      "patternProperties": {"^x-": {}},
+      "additionalProperties": false
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/definitions/capability" }
+    },
+    "capabilitiesArray": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/namedCapability" }
+    },
+    "capability": {
+      "type": "object",
+      "properties": {
+        "namespace": { "type": "string" },
+        "module": { "type": "string" },
+        "module_version": { "type": "string" },
+        "vars": { "$ref": "#/definitions/variables" },
+        "connections": { "$ref": "#/definitions/connection_targets" }
+      }
+    },
+    "namedCapability": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "namespace": { "type": "string" },
+        "module": { "type": "string" },
+        "module_version": { "type": "string" },
+        "vars": { "$ref": "#/definitions/variables" },
+        "connections": { "$ref": "#/definitions/connection_targets" }
+      }
+    },
+    "variables": {
+      "type": "object",
+      "patternProperties": {
+        "^[A-Za-z_][A-Za-z0-9_\\-]*$": {
+          "anyOf": [
+            { "type": "boolean" },
+            { "type": "string" },
+            { "type": "integer" },
+            { "type": "number" },
+            { "type": "object" },
+            { "type": "array" }
+          ]
+        }
+      }
+    },
+    "connection_targets": {
+      "type": "object",
+      "patternProperties": {
+        "^[_a-z0-9\\-]+$": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^(?:([a-zA-Z0-9\\-]+)\\.)?(?:([a-zA-Z0-9\\-]+)\\.)?([a-zA-Z0-9\\-]+)$"
+            },
+            { "$ref": "#/definitions/connection_target" }
+          ]
+        }
+      }
+    },
+    "connection_target": {
+      "type": "object",
+      "properties": {
+        "stack_name": {
+          "type": "string"
+        },
+        "env_name": {
+          "type": "string"
+        },
+        "block_name": {
+          "type": "string"
+        }
+      },
+      "required": ["block_name"]
+    }
+  }
+}

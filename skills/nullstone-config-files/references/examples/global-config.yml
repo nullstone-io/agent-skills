@@ -1,0 +1,66 @@
+# Path: .nullstone/config.yml
+# Top-level elements are ordered so consumers appear BEFORE their dependencies:
+#   subdomains -> apps -> datastores -> cluster_namespaces -> clusters -> networks
+# The domain is shared (lives in the `global` stack's `global` env), so the
+# connection uses the cross-stack form `global.global.acme-domain`.
+
+version: "0.1"
+
+subdomains:
+  api-subdomain:
+    module: nullstone/aws-subdomain
+    connections:
+      domain: global.global.acme-domain
+
+apps:
+  api:
+    module: nullstone/aws-fargate-service
+    connections:
+      cluster-namespace: namespace0
+      subdomain: api-subdomain
+    vars:
+      num_tasks: 1
+      cpu: 256
+      memory: 512
+    environment:
+      LOG_LEVEL: info
+      BASE_URL: "{{ NULLSTONE_ENV }}.acme.com"
+    capabilities:
+      postgres:
+        module: nullstone/aws-postgres-access
+        connections:
+          postgres: db
+
+datastores:
+  db:
+    module: nullstone/aws-rds-postgres
+    connections:
+      network: network0
+    vars:
+      postgres_version: "16"
+      instance_class: "db.t3.medium"
+      allocated_storage: 50
+
+cluster_namespaces:
+  namespace0:
+    module: nullstone/aws-fargate-namespace
+    connections:
+      cluster: fargate0
+
+clusters:
+  fargate0:
+    module: nullstone/aws-fargate
+    connections:
+      network: network0
+
+networks:
+  network0:
+    module: nullstone/aws-network
+    vars:
+      cidr: "10.0.0.0/16"
+      private_subnets:
+        - "10.0.1.0/24"
+        - "10.0.2.0/24"
+      public_subnets:
+        - "10.0.101.0/24"
+        - "10.0.102.0/24"

@@ -1,0 +1,42 @@
+# Path: .nullstone/stacks/web/config.yml
+# Stack-scoped config. The directory name (`web`) must match the Nullstone stack name.
+# If ANY file exists under .nullstone/stacks/<stack>/, the global files at
+# .nullstone/config.yml, .nullstone/<env>.yml, and .nullstone/previews.yml are
+# ignored for that stack.
+#
+# Cross-stack / cross-env connections:
+#   - `<stack>.<block>`               — different stack, same env
+#   - `<stack>.<env>.<block>`         — different stack AND env
+# Shared infra like domains typically lives in the `global` stack's `global` env,
+# so the reference is `global.global.<block>`.
+
+version: "0.1"
+
+subdomains:
+  api-subdomain:
+    module: nullstone/aws-subdomain
+    connections:
+      domain: global.global.acme-domain
+
+apps:
+  api:
+    module: nullstone/aws-fargate-service
+    connections:
+      cluster-namespace: namespace0
+      subdomain: api-subdomain
+    vars:
+      num_tasks: 2
+      cpu: 512
+      memory: 1024
+
+cluster_namespaces:
+  namespace0:
+    module: nullstone/aws-fargate-namespace
+    connections:
+      cluster: fargate0
+
+clusters:
+  fargate0:
+    module: nullstone/aws-fargate
+    connections:
+      network: network0

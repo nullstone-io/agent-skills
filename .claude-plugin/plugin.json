@@ -1,0 +1,22 @@
+{
+  "name": "nullstone-skills",
+  "version": "0.1.0",
+  "description": "A catalog of Claude Code skills for using and enhancing Nullstone — provisioning infrastructure, authoring modules, deploying apps, and managing environments.",
+  "author": {
+    "name": "Nullstone",
+    "url": "https://nullstone.io"
+  },
+  "homepage": "https://github.com/nullstone-io/agent-skills",
+  "repository": "https://github.com/nullstone-io/agent-skills",
+  "license": "MIT",
+  "keywords": [
+    "nullstone",
+    "infrastructure",
+    "iac",
+    "devops",
+    "skills"
+  ],
+  "skills": [
+    "./skills/nullstone-config-files"
+  ]
+}

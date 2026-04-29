@@ -31,19 +31,29 @@ description: One-line description of when Claude should invoke this skill.
 
 The `description` is what Claude reads to decide whether the skill applies to a given request. Be specific about the triggering situation.
 
-## Using a skill
+## Installing the plugin
 
-Install a skill by copying its directory into one of:
+This repo is published as a Claude Code plugin via its own marketplace. Install all skills at once:
+
+```
+/plugin marketplace add nullstone-io/agent-skills
+/plugin install nullstone-skills@nullstone
+```
+
+Skills are then namespaced as `nullstone-skills:<skill-name>` and invoked automatically by Claude Code when their description matches a user request.
+
+### Installing a single skill manually
+
+If you'd rather pull in one skill without the plugin, copy its directory into:
 
 - `~/.claude/skills/<skill-name>/` — available in every session on your machine
 - `.claude/skills/<skill-name>/` — scoped to a single project
-
-Claude Code discovers skills at session start and invokes them via the `Skill` tool when their description matches a user request.
 
 ## Contributing a skill
 
 1. Copy `skills/_template/` to `skills/<your-skill-name>/`.
 2. Fill in the frontmatter (`name`, `description`) and the body.
-3. Keep the skill focused on one workflow. Split broad capabilities into multiple skills.
-4. Put large reference material under `references/` and load it on demand from `SKILL.md`, so the main body stays short.
-5. Open a PR.
+3. Register the new skill directory in `.claude-plugin/plugin.json` under `skills` so it ships with the plugin. (`_template/` is intentionally not registered.)
+4. Keep the skill focused on one workflow. Split broad capabilities into multiple skills.
+5. Put large reference material under `references/` and load it on demand from `SKILL.md`, so the main body stays short.
+6. Open a PR.

@@ -1,5 +1,5 @@
 <!-- source: https://docs.nullstone.io/gitops/iac/overview.html -->
-<!-- fetched: 2026-04-24 -->
+<!-- fetched: 2026-05-25 -->
 
 # Infrastructure as Code
 
@@ -21,6 +21,10 @@ An overrides file is either named `previews.yml` (for all preview environments) 
 TIP
 
 You can manage multiple stacks from a single repository using stack-specific subdirectories (e.g. `.nullstone/stacks/<stack-name>/config.yml`). See [Multi-Stack Configuration](https://docs.nullstone.io/gitops/iac/multi-stack.html) for details.
+
+Using with AI agents
+
+If you're editing `.nullstone/*.yml` with Claude or another AI agent, install the [`nullstone-config-files` skill](https://docs.nullstone.io/ai/skills/nullstone-config-files.html) alongside the [Nullstone MCP server](https://docs.nullstone.io/ai/mcp-server/overview.html). The skill teaches the agent the style rules and overlay semantics described here; the MCP lets it resolve modules and their categories on the fly.
 
 The format of the IaC file is similar to a docker-compose file. An example is shown below.
 

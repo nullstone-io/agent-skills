@@ -1,5 +1,5 @@
 <!-- source: https://docs.nullstone.io/gitops/iac/cluster-namespaces.html -->
-<!-- fetched: 2026-04-24 -->
+<!-- fetched: 2026-05-25 -->
 
 # `cluster_namespaces` top-level element
 

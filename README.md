@@ -31,20 +31,32 @@ description: One-line description of when Claude should invoke this skill.
 
 The `description` is what Claude reads to decide whether the skill applies to a given request. Be specific about the triggering situation.
 
-## Installing the plugin
+## Installing
 
-This repo is published as a Claude Code plugin via its own marketplace. Install all skills at once:
+These skills follow the [Agent Skills open standard](https://agentskills.io/specification), so the same `SKILL.md` works unmodified in every tool that supports it (Claude Code, OpenAI Codex, Cursor, Gemini CLI, and ~30 others). Pick whichever channel fits your agent.
+
+### Claude Code (recommended)
+
+This repo is published as a Claude Code plugin via its own marketplace, which gives you versioned install and upgrade across the whole catalog:
 
 ```
 /plugin marketplace add nullstone-io/agent-skills
 /plugin install nullstone-skills@nullstone
 ```
 
-Skills are then namespaced as `nullstone-skills:<skill-name>` and invoked automatically by Claude Code when their description matches a user request.
+Skills are then namespaced as `nullstone-skills:<skill-name>` and invoked automatically by Claude Code when their description matches a user request. Run `/plugin update` to upgrade.
 
-### Installing a single skill manually
+### Any other tool (cross-tool installer)
 
-If you'd rather pull in one skill without the plugin, copy its directory into:
+[skills.sh](https://www.skills.sh/) installs Agent Skills into Claude Code, Codex, Cursor, and other compatible agents from one command:
+
+```
+npx skills add nullstone-io/agent-skills
+```
+
+### Manual
+
+To pull in a single skill without any installer, copy its directory into the location your tool reads skills from — for Claude Code that is:
 
 - `~/.claude/skills/<skill-name>/` — available in every session on your machine
 - `.claude/skills/<skill-name>/` — scoped to a single project

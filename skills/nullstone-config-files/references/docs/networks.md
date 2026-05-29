@@ -1,5 +1,5 @@
 <!-- source: https://docs.nullstone.io/gitops/iac/networks.html -->
-<!-- fetched: 2026-04-24 -->
+<!-- fetched: 2026-05-25 -->
 
 # `networks` top-level element
 

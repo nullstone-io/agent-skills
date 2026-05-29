@@ -1,5 +1,5 @@
 <!-- source: https://docs.nullstone.io/gitops/iac/datastores.html -->
-<!-- fetched: 2026-04-24 -->
+<!-- fetched: 2026-05-25 -->
 
 # `datastores` top-level element
 

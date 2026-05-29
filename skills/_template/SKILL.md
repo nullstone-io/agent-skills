@@ -1,6 +1,9 @@
 ---
 name: skill-name
 description: One-line description of when Claude should invoke this skill. Lead with the trigger ("Use when the user wants to…") so the matcher picks it up reliably.
+license: MIT
+metadata:
+  version: "0.1.0"
 ---
 
 # Skill name

@@ -6,14 +6,14 @@ This repo publishes a catalog of Claude Code skills for Nullstone. Customers ins
 
 Think of each skill as a public API whose "consumers" are Claude agents acting on customer repos.
 
-| Change type | Example | Bump |
-|---|---|---|
-| New skill added | `nullstone-deploy-app` introduced | MINOR |
-| Existing skill: new optional trigger, new reference doc, clarifying rewrite | docs refresh, new example file, non-behavior edits | PATCH |
-| Existing skill: style-rule change, frontmatter description tightened, trigger narrowed | switch capabilities from map to array form, change connection shorthand rule | MINOR |
+| Change type                                                                                          | Example                                                                                               | Bump  |
+|------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|-------|
+| New skill added                                                                                      | `nullstone-deploy-app` introduced                                                                     | MINOR |
+| Existing skill: new optional trigger, new reference doc, clarifying rewrite                          | docs refresh, new example file, non-behavior edits                                                    | PATCH |
+| Existing skill: style-rule change, frontmatter description tightened, trigger narrowed               | switch capabilities from map to array form, change connection shorthand rule                          | MINOR |
 | Existing skill: removed, renamed, or a rule inverted such that previously valid output becomes wrong | rename `nullstone-config-files` → `nullstone-iac-files`; change "omit module_version" to "always pin" | MAJOR |
-| Bundled schema: new version (e.g. `config.0.2.json`) added alongside | additive | MINOR |
-| Bundled schema: existing version's file replaced with a backwards-incompatible revision | customer YAML breaks validation | MAJOR |
+| Bundled schema: new version (e.g. `config.0.2.json`) added alongside                                 | additive                                                                                              | MINOR |
+| Bundled schema: existing version's file replaced with a backwards-incompatible revision              | customer YAML breaks validation                                                                       | MAJOR |
 
 **Rule of thumb:** if a customer regenerates a YAML file with the same prompt and gets a meaningfully different output, that's at least MINOR. If it breaks their existing file, that's MAJOR.
 

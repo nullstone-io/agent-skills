@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "nullstone-skills",
-      "source": ".",
+      "source": "./",
       "description": "A catalog of Claude Code skills for using and enhancing Nullstone.",
       "version": "0.1.0",
       "homepage": "https://github.com/nullstone-io/agent-skills",

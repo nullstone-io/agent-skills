@@ -2,6 +2,10 @@
 
 All notable changes to this repo are documented here. Versioning follows [SemVer](https://semver.org/spec/v2.0.0.html) — see [VERSIONING.md](VERSIONING.md).
 
+## 0.2.1 (2026-05-29)
+
+- Fixed `source` definition in claude plugin definition.
+
 ## 0.2.0 (2026-05-29)
 
 - Package the catalog as a Claude Code plugin (`nullstone-skills`) with a marketplace at `.claude-plugin/marketplace.json`. Users can now install all skills with `/plugin marketplace add nullstone-io/agent-skills` followed by `/plugin install nullstone-skills@nullstone`. Skills are explicitly enumerated in `plugin.json` so `skills/_template/` does not load as a live skill.

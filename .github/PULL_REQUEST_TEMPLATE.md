@@ -14,10 +14,12 @@
 ## Checklist
 
 - [ ] Updated `CHANGELOG.md` under `[Unreleased]` with a user-facing line.
+- [ ] New skill: registered in `.claude-plugin/plugin.json` `skills` (unregistered skills don't ship).
 - [ ] If behavior changed: version bump follows [VERSIONING.md](../VERSIONING.md) (MINOR for style rules, MAJOR for breaking changes).
+- [ ] Version is in sync across `plugin.json`, the `marketplace.json` plugin entry, and each changed skill's `SKILL.md` `metadata.version` (mismatches mean users' `/plugin marketplace update` won't fetch the change).
 - [ ] `references/examples/*.yml` validate against the bundled schema.
-- [ ] SKILL.md frontmatter is valid (name matches directory, description under 500 chars).
-- [ ] CI passes.
+- [ ] SKILL.md frontmatter follows the [Agent Skills spec](https://agentskills.io/specification) (name matches directory; description ≤ 1024 chars).
+- [ ] CI passes (`yarn validate`).
 
 ## Test plan
 

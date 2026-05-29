@@ -44,7 +44,7 @@ This repo is published as a Claude Code plugin via its own marketplace, which gi
 /plugin install nullstone-skills@nullstone
 ```
 
-Skills are then namespaced as `nullstone-skills:<skill-name>` and invoked automatically by Claude Code when their description matches a user request. Run `/plugin update` to upgrade.
+Skills are then namespaced as `nullstone-skills:<skill-name>` and invoked automatically by Claude Code when their description matches a user request. To upgrade after a new release, run `/plugin marketplace update nullstone` then `/reload-plugins` (or enable auto-update for the marketplace).
 
 ### Any other tool (cross-tool installer)
 

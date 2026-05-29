@@ -13,7 +13,7 @@ Each skill lives at `skills/<skill-name>/SKILL.md` (with optional `scripts/` and
 When you create a new skill, you MUST also register it. The plugin manifest enumerates skill directories explicitly — skills that aren't listed do not ship.
 
 1. Copy `skills/_template/` to `skills/<your-skill-name>/`.
-2. Fill in the SKILL.md frontmatter (`name`, `description`) and body.
+2. Fill in the SKILL.md frontmatter (`name`, `description`, and `metadata.version` set to the current catalog version — see `_template/`) and body.
 3. **Register the skill in [.claude-plugin/plugin.json](.claude-plugin/plugin.json)** by adding `"./skills/<your-skill-name>"` to the `skills` array.
 4. Add a CHANGELOG.md entry under `[Unreleased]` describing the new skill (see [VERSIONING.md](VERSIONING.md) for the SemVer rules — a new skill is a MINOR bump).
 

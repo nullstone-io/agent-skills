@@ -12,6 +12,13 @@
 //      against references/schema/config.<version>.json (picked by the YAML's
 //      `version:` key).
 //
+// Plugin-manifest checks (these are what make `/plugin marketplace update`
+// actually serve a new version to users):
+//   4. marketplace.json plugin `version` == plugin.json `version` == each
+//      skill's `metadata.version`; the plugin `source` starts with "./" (a bare
+//      "." is rejected by Claude Code); and every real skill is registered in
+//      plugin.json `skills`, with no dangling registrations.
+//
 // Exit code: 0 on success, 1 on any validation failure.
 
 import { readFileSync, readdirSync, existsSync, statSync } from "node:fs";
@@ -162,6 +169,79 @@ function validateSkill(skillDir) {
   }
 }
 
+function loadJson(path) {
+  const rel = relative(ROOT, path).replaceAll("\\", "/");
+  if (!existsSync(path)) {
+    fail(`${rel}: missing`);
+    return null;
+  }
+  try {
+    return JSON.parse(readFileSync(path, "utf8"));
+  } catch (e) {
+    fail(`${rel}: invalid JSON: ${e.message}`);
+    return null;
+  }
+}
+
+// Validate the Claude Code plugin manifests and their consistency with skills/.
+// `skillNames` is the list of real (non-`_`) skill directory names.
+function validateManifests(skillNames) {
+  const before = failures;
+  const plugin = loadJson(join(ROOT, ".claude-plugin", "plugin.json"));
+  const market = loadJson(join(ROOT, ".claude-plugin", "marketplace.json"));
+  if (!plugin || !market) return;
+
+  const version = plugin.version;
+  if (typeof version !== "string" || version === "") {
+    fail(".claude-plugin/plugin.json: `version` is required and must be a string");
+  }
+
+  // marketplace.json must carry an entry for this plugin, with a matching
+  // version and a Claude-Code-supported relative `source`.
+  const entry = Array.isArray(market.plugins)
+    ? market.plugins.find((p) => p && p.name === plugin.name)
+    : undefined;
+  if (!entry) {
+    fail(`.claude-plugin/marketplace.json: no plugin entry named ${JSON.stringify(plugin.name)}`);
+  } else {
+    if (entry.version !== version) {
+      fail(`marketplace.json plugin "${plugin.name}" version (${JSON.stringify(entry.version)}) must match plugin.json version (${JSON.stringify(version)})`);
+    }
+    if (typeof entry.source !== "string" || !entry.source.startsWith("./")) {
+      fail(`marketplace.json plugin "${plugin.name}" source must be a relative path starting with "./" (got ${JSON.stringify(entry.source)}); a bare "." is rejected by Claude Code as an unsupported source type`);
+    }
+  }
+
+  // Registration must be complete in both directions: every real skill listed,
+  // and every listed path present on disk.
+  const registered = Array.isArray(plugin.skills) ? plugin.skills.map(String) : [];
+  const registeredNames = new Set(registered.map((p) => p.split("/").pop()));
+  for (const p of registered) {
+    if (!existsSync(join(resolve(ROOT, p), "SKILL.md"))) {
+      fail(`plugin.json skills: ${JSON.stringify(p)} has no SKILL.md`);
+    }
+  }
+  for (const name of skillNames) {
+    if (!registeredNames.has(name)) {
+      fail(`plugin.json skills: skill "${name}" is not registered — add "./skills/${name}" (unregistered skills do not ship)`);
+    }
+  }
+
+  // The catalog is single-versioned: each skill's metadata.version, if set,
+  // must equal the plugin version. A bumped CHANGELOG with a stale skill
+  // version means users' update-detection never fires.
+  for (const name of skillNames) {
+    const v = parseFrontmatter(join(SKILLS_DIR, name, "SKILL.md"))?.metadata?.version;
+    if (typeof v === "string" && v !== version) {
+      fail(`skills/${name}/SKILL.md metadata.version (${JSON.stringify(v)}) must match the catalog version in plugin.json (${JSON.stringify(version)})`);
+    }
+  }
+
+  if (failures === before) {
+    console.log(`OK:   manifests (catalog version ${version}, ${skillNames.length} skill(s) registered)`);
+  }
+}
+
 function main() {
   if (!existsSync(SKILLS_DIR)) {
     fail(`skills/ directory not found at ${SKILLS_DIR}`);
@@ -176,6 +256,9 @@ function main() {
     console.log(`--- ${name}`);
     validateSkill(join(SKILLS_DIR, name));
   }
+
+  console.log(`--- manifests`);
+  validateManifests(entries);
 
   process.exit(failures ? 1 : 0);
 }

@@ -1,6 +1,6 @@
 ---
 name: nullstone-config-files
-description: Use when creating or editing Nullstone IaC YAML files under `.nullstone/` — adding or wiring apps, datastores, networks, domains, subdomains, ingresses, clusters, cluster-namespaces; setting `vars`, `environment`, `connections`, or `capabilities`; configuring `events`. Triggers on file paths `.nullstone/config.yml`, `.nullstone/<env>.yml`, `.nullstone/previews.yml`, and anything under `.nullstone/stacks/<stack>/`.
+description: Use when creating or editing Nullstone IaC YAML files under `.nullstone/` — adding or wiring apps, datastores, networks, domains, subdomains, ingresses, clusters, cluster-namespaces; setting `vars`, `environment`, `connections`, or `capabilities`; configuring `events`. Triggers on file paths `.nullstone/config.yml`, `.nullstone/{env}.yml`, `.nullstone/previews.yml`, and anything under `.nullstone/stacks/{stack}/`.
 license: MIT
 metadata:
   version: "0.1.0"

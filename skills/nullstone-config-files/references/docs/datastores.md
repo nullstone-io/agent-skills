@@ -1,5 +1,5 @@
 <!-- source: https://docs.nullstone.io/gitops/iac/datastores.html -->
-<!-- fetched: 2026-04-24 -->
+<!-- fetched: 2026-08-31 -->
 
 # `datastores` top-level element
 
@@ -64,3 +64,15 @@ See [`blocks#vars`](https://docs.nullstone.io/gitops/iac/blocks.html#vars).
 ### `connections`
 
 See [`blocks#connections`](https://docs.nullstone.io/gitops/iac/blocks.html#connections).
+
+### `metadata`
+
+Datastores are the primary place to declare data classification. See [`blocks#metadata`](https://docs.nullstone.io/gitops/iac/blocks.html#metadata) for the full reference and the [Data Classification concept page](https://docs.nullstone.io/getting-started/datastores/classification.html).
+
+```yaml
+datastores:
+  customer-db:
+    module: nullstone/aws-rds-postgres
+    metadata:
+      dataclassification: customer-content
+```

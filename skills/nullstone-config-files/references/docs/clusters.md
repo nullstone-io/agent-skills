@@ -1,5 +1,5 @@
 <!-- source: https://docs.nullstone.io/gitops/iac/clusters.html -->
-<!-- fetched: 2026-04-24 -->
+<!-- fetched: 2026-08-31 -->
 
 # `clusters` top-level element
 

@@ -1,5 +1,5 @@
 <!-- source: https://docs.nullstone.io/gitops/iac/blocks.html -->
-<!-- fetched: 2026-04-24 -->
+<!-- fetched: 2026-08-31 -->
 
 # `blocks` top-level element
 
@@ -55,4 +55,24 @@ subdomains:
   api-subdomain:
     connections:
       domain: global.acme-domain # refers to a domain created in the "global" stack
+```
+
+### `metadata`
+
+The optional `metadata` section holds governance/descriptive metadata for the block. Today its only field is `dataclassification`, the block's [data classification](https://docs.nullstone.io/getting-started/datastores/classification.html) sensitivity level.
+
+`metadata.dataclassification` is a single value, available on every block type. Allowed values: `public`, `operational`, `customer-content`, `restricted`, `critical`. Omitting it leaves the workspace **unclassified**, a first-class state that emits no cloud tag.
+
+When set, Nullstone emits the level as a cloud tag/label on every resource the workspace provisions — an AWS tag (`DataClassification`), GCP label (`dataclassification`), Azure tag (`DataClassification`), and Kubernetes label (`nullstone.io/data-classification`) — using the composite value `<#>-<slug>` (e.g. `2-customer-content`).
+
+```yaml
+datastores:
+  customer-db:
+    module: nullstone/aws-rds-postgres
+    metadata:
+      dataclassification: customer-content
+  feature-flags:
+    module: nullstone/aws-dynamodb
+    metadata:
+      dataclassification: operational
 ```

@@ -1,5 +1,5 @@
 <!-- source: https://docs.nullstone.io/gitops/iac/apps.html -->
-<!-- fetched: 2026-04-24 -->
+<!-- fetched: 2026-08-31 -->
 
 # `apps` top-level element
 

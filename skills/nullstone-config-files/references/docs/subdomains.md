@@ -1,5 +1,5 @@
 <!-- source: https://docs.nullstone.io/gitops/iac/subdomains.html -->
-<!-- fetched: 2026-04-24 -->
+<!-- fetched: 2026-08-31 -->
 
 # `subdomains` top-level element
 

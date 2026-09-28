@@ -1,5 +1,5 @@
 <!-- source: https://docs.nullstone.io/gitops/iac/clusters.html -->
-<!-- fetched: 2026-04-24 -->
+<!-- fetched: 2026-09-28 -->
 
 # `clusters` top-level element
 
@@ -27,7 +27,7 @@ See [`blocks#module`](https://docs.nullstone.io/gitops/iac/blocks.html#module).
 
 ### `module_version`
 
-See [`blocks#module_version`](https://docs.nullstone.io/gitops/iac/blocks.html#module_version).
+See [`blocks#module_version`](https://docs.nullstone.io/gitops/iac/blocks.html#module-version).
 
 ### `vars`
 

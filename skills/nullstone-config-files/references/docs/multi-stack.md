@@ -1,5 +1,5 @@
 <!-- source: https://docs.nullstone.io/gitops/iac/multi-stack.html -->
-<!-- fetched: 2026-04-24 -->
+<!-- fetched: 2026-09-28 -->
 
 # Multi-Stack Configuration
 

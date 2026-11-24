@@ -1,5 +1,5 @@
 <!-- source: https://docs.nullstone.io/gitops/iac/overview.html -->
-<!-- fetched: 2026-04-24 -->
+<!-- fetched: 2026-11-24 -->
 
 # Infrastructure as Code
 
@@ -14,13 +14,17 @@ Having configuration in code allows you to correlate infrastructure changes with
 There are two types of Nullstone IaC files that are placed in `.nullstone/` directory of your repository.
 
 -   `.nullstone/config.yml` - Used as a primary source of configuration
--   Overrides file - Used to override configuration per environment from `nullstone/config.yml` or from the Nullstone UI.
+-   Overrides file - Used to override configuration per environment from `.nullstone/config.yml` or from the Nullstone UI.
 
 An overrides file is either named `previews.yml` (for all preview environments) or `<env-name>.yml` (for a specific environment override). Nullstone GitOps runs a synchronization per environment so the effective config will be a merge of `config.yml` and the env-specific overrides file. If you change a `previews.yml` in a pull request, it will only affect the preview environment(s) that are synced on that branch.
 
 TIP
 
 You can manage multiple stacks from a single repository using stack-specific subdirectories (e.g. `.nullstone/stacks/<stack-name>/config.yml`). See [Multi-Stack Configuration](https://docs.nullstone.io/gitops/iac/multi-stack.html) for details.
+
+Using with AI agents
+
+If you're editing `.nullstone/*.yml` with Claude or another AI agent, install the [`nullstone-config-files` skill](https://docs.nullstone.io/ai/skills/nullstone-config-files.html) alongside the [Nullstone MCP server](https://docs.nullstone.io/ai/mcp-server/overview.html). The skill teaches the agent the style rules and overlay semantics described here; the MCP lets it resolve modules and their categories on the fly.
 
 The format of the IaC file is similar to a docker-compose file. An example is shown below.
 
